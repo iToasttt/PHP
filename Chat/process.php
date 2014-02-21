@@ -47,8 +47,8 @@
        			$message = preg_replace($reg_exUrl, '<a href="'.$url[0].'" target="_blank">'.$url[0].'</a>', $message); //reads url
 				} 
 			 
-        	
-        	 fwrite(fopen('chat.txt', 'a'), "<span>". $nickname . "</span>" . $message = str_replace("\n", " ", $message) . "\n"); //Keeps log of all messages ;) Commands soon for this software.
+        	 $fp = fopen('chat.txt', 'a');
+        	 fwrite($fp, "<span>". $nickname . "</span>" . $message = str_replace("\n", " ", $message) . "\n");
 		 }
         	 break;
     	
