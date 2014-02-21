@@ -7,7 +7,7 @@
     switch($function) {
     
     	 case('getState'):
-        	 if (file_exists('chat.txt')){
+        	 if (file_exists('Chat/chat.txt')){
                $lines = file('chat.txt');
         	 }
              $log['state'] = count($lines); 
@@ -15,7 +15,7 @@
     	
     	 case('update'):
         	$state = $_POST['state'];
-        	if (file_exists('chat.txt')){
+        	if (file_exists('Chat/chat.txt')){
         	   $lines = file('chat.txt');
         	 }
         	 $count =  count($lines);
@@ -39,12 +39,12 @@
     	 
     	 case('send'):
 		  $nickname = htmlentities(strip_tags($_POST['nickname']));
-			 $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/"; //doesn't work on local, must be an online webserver!
+			 $reg_exUrl = "/(www|ssh|http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/"; //doesn't work on local, must be an online webserver!
 			  $message = htmlentities(strip_tags($_POST['message']));
 		 if (($message) != "\n"){
         	
 			 if(preg_match($reg_exUrl, $message, $url)) {
-       			$message = preg_replace($reg_exUrl, '<a href="'.$url[0].'" target="_blank">'.$url[0].'</a>', $message); //reads url
+       			$message = preg_replace($reg_exUrl, '<a href="'.$url[0].'" target="_blank">'.$url[0].'</a>', $message); //Sends any link in hyperlink form.
 				} 
 			 
         	 $fp = fopen('chat.txt', 'a');
